@@ -1,58 +1,57 @@
-.myApp {
-  width: 100%;
-}
-#root {
-  width: 100%;
-  padding: 2rem;
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
 }
 
-/* ADD TASK */
-.addTask {
-  background: #fff;
+.container {
+  margin: 0 auto;
+  background: white;
   padding: 20px;
-  border-radius: 6px;
-  max-width: 500px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-/* KANBAN */
-.kanban-column {
-  background: #f8f9fa;
-  border-radius: 6px;
-  padding: 12px;
-  min-height: 280px;
-}
-
-.kanban-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1d9e2a;
+  text-transform: uppercase;
   font-weight: 600;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 8px;
   margin-bottom: 10px;
-  gap: 8px;
 }
 
-.kanban-body {
-  margin-top: 10px;
-}
-
-/* TASK */
-.task-item {
-  background: #fff;
+form button {
+  padding: 8px 16px;
+  background: #1d9e2a;
+  color: white;
+  border: none;
   border-radius: 4px;
-  padding: 10px;
+  width: 100%;
+}
+
+.post {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
   margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
-.task-item small {
-  color: #999;
-  display: block;
-  margin-bottom: 5px;
+.post button {
+  margin-right: 8px;
 }
 
-.task-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
+.post button:first-of-type {
+  background: rgb(47, 185, 248);
+}
+
+.post button:last-of-type {
+  background: red;
+  color: white;
 }
