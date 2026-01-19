@@ -1,0 +1,58 @@
+.myApp {
+  width: 100%;
+}
+#root {
+  width: 100%;
+  padding: 2rem;
+}
+
+/* ADD TASK */
+.addTask {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  max-width: 500px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* KANBAN */
+.kanban-column {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 280px;
+}
+
+.kanban-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.kanban-body {
+  margin-top: 10px;
+}
+
+/* TASK */
+.task-item {
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.task-item small {
+  color: #999;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
