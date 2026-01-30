@@ -1,70 +1,90 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { usePosts } from "../Context/PostContext";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { updatePost } from "../redux/postThunk";
+import type { AppDispatch } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { Post } from "../types/post";
 
 function EditPost() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { posts, updatePost } = usePosts();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const post = posts.find(p => p.id === Number(id));
+  const post = useSelector((state: { posts: { posts: Post[]; }; }) =>
+    state.posts.posts.find((p: { id: number; }) => p.id === Number(id))
+  );
 
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [form, setForm] = useState(() => ({
+    title: post?.title || "",
+    body: post?.body || "",
+  }));
 
+
+  // Đổ dữ liệu vào for
   useEffect(() => {
     if (post) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTitle(post.title);
-      setBody(post.body);
+      setForm({
+        title: post.title,
+        body: post.body,
+      });
     }
   }, [post]);
 
-  if (!post) return <p>Không tìm thấy bài viết</p>;
+  // Nếu không có post → quay về list
+  if (!post) {
+    return <p>Không tìm thấy bài viết</p>;
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 🔥 Nếu bài từ API thật → PUT
-    if (!post.isLocal) {
-      await axios.put(
-        `https://jsonplaceholder.typicode.com/posts/${post.id}`,
-        { title, body }
-      );
-    }
-
-    // 🔥 Cập nhật STATE (QUAN TRỌNG NHẤT)
-    updatePost({
+    const updatedPost: Post = {
       ...post,
-      title,
-      body,
-    });
+      title: form.title,
+      body: form.body,
+    };
 
-    alert("Cập nhật thành công");
+    dispatch(updatePost(updatedPost));
     navigate("/");
   };
 
   return (
-    <div className="form">
+    <div>
       <h2>Sửa bài viết</h2>
 
       <form onSubmit={handleSubmit}>
-        <input
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
+    
+          <input
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            placeholder="Tiêu đề"
+            required
+          />
+    
 
-        <textarea
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
+      
+          <textarea
+            name="body"
+            value={form.body}
+            onChange={handleChange}
+            placeholder="Nội dung"
+            required
+          />
+  
 
-        <button>Cập nhật</button>
+        <button type="submit">Lưu</button>
       </form>
     </div>
   );
 }
 
 export default EditPost;
+

@@ -1,62 +1,28 @@
 import { useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addPost } from "../redux/postThunk";
+import type { AppDispatch } from "../redux/store";
 import { useNavigate } from "react-router-dom";
-import { usePosts } from "../Context/PostContext";
 
-function AddPost() {
+export default function AddPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { addPost } = usePosts();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!title || !body) {
-      alert("Vui lòng nhập đủ thông tin");
-      return;
-    }
-
-    // Gọi API (mock)
-    const res = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      { title, body, userId: 1 }
-    );
-
-    // 🔥 QUAN TRỌNG: TẠO ID LOCAL
-    const newPost = {
-      ...res.data,
-      id: Date.now(),    
-      isLocal: true,         
-    };
-
-    addPost(newPost);
-
-    alert("Thêm bài viết thành công");
+  const submit = async () => {
+    await dispatch(addPost({ title, body }));
     navigate("/");
   };
 
   return (
-    <div className="form">
-      <h2>Thêm bài viết</h2>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Tiêu đề"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-
-        <textarea
-          placeholder="Nội dung"
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-
-        <button>Thêm</button>
+    <>
+      <h2>Add Post</h2>
+      <form action="">
+        <input onChange={e => setTitle(e.target.value)} type="text" placeholder="Title" />
+      <textarea onChange={e => setBody(e.target.value)} placeholder="Body" name="" id="" />
+      <button type="button" onClick={submit}>Thêm</button>
       </form>
-    </div>
+    </>
   );
 }
-
-export default AddPost;

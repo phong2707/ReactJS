@@ -1,5 +1,5 @@
 {
-  "name": "todo-list",
+  "name": "asm-reactjs",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
-    "@types/react-redux": "^7.1.34",
-    "axios": "^1.13.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
