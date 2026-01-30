@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "username": "phong",
+    "password": "123456",
+    "avatar": "https://cdn.superkids.edu.vn/wp-content/uploads/2025/10/bo-anh-gai-xinh-1.jpg"
+  },
+  {
+    "id": 2,
+    "username": "user",
+    "password": "123456",
+    "avatar": "https://www.w3schools.com/howto/img_avatar2.png"
+  }
+]
