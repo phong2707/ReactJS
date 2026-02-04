@@ -4,7 +4,7 @@ import ProductNew from "./pages/ProductNew";
 import ProductEdit from "./pages/ProductEdit";
 import ProductDelete from "./pages/ProductDelete";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -17,5 +17,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
