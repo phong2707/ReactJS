@@ -1,19 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteProduct } from "../features/products/productThunk";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAppDispatch } from "../app/hooks";
+import { deleteProductLocal } from "../features/products/productSlice";
+
 export default function ProductDelete() {
   const { id } = useParams();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
-    <div>
-      <p>Bạn có chắc muốn xóa sản phẩm?</p>
-      <button
+    <div className="delete-page">
+      <p>Bạn có chắc muốn xóa?</p>
+      <button className="delete-Page-btn"
         onClick={() => {
-          dispatch(deleteProduct(Number(id)));
+          dispatch(deleteProductLocal(Number(id)));
           navigate("/products");
         }}
       >

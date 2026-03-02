@@ -1,16 +1,16 @@
-import { useDispatch } from "react-redux";
-import { addProduct } from "../features/products/productThunk";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../app/hooks";
+import { addProductLocal } from "../features/products/productSlice";
 import ProductForm from "../components/ProductForm";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export default function ProductNew() {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
     <ProductForm
-      onSubmit={(data: any) => {
-        dispatch(addProduct(data));
+      onSubmit={data => {
+        dispatch(addProductLocal(data));
         navigate("/products");
       }}
     />

@@ -1,5 +1,4 @@
-// CartContext.tsx
-import React, { createContext, useReducer, useContext, type ReactNode, useMemo } from 'react';
+import { createContext, useReducer, useContext, type ReactNode, useMemo } from 'react';
 import { cartReducer, initialState } from './cartReducer';
 import type { Product } from './types';
 

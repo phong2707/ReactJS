@@ -20,15 +20,31 @@ export default function ProductForm({ defaultValue, onSubmit }: Props) {
           title,
           price,
           thumbnail,
-          rating: 0,
+          rating: defaultValue?.rating ?? 0,
         });
       }}
     >
-      <input value={title} onChange={e => setTitle(e.target.value)} />
-      <input type="number" value={price} onChange={e => setPrice(e.target.valueAsNumber)} />
-      <input value={thumbnail} onChange={e => setThumbnail(e.target.value)} />
+      <input
+        placeholder="Title"
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
+
+      <input
+        type="number"
+        placeholder="Price"
+        value={price}
+        onChange={e => setPrice(e.target.valueAsNumber)}
+      />
+
+      <input
+        placeholder="Thumbnail URL"
+        value={thumbnail}
+        onChange={e => setThumbnail(e.target.value)}
+      />
 
       {thumbnail && <img src={thumbnail} width={120} />}
+
       <button>Lưu</button>
     </form>
   );
